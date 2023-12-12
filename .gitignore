@@ -1,0 +1,18 @@
+# .gitignore
+
+# Ignore vendor directory created by Composer
+/vendor/
+
+# Ignore environment configuration file
+/app/config/config.ini
+/.env
+
+# Ignore database details file
+/database/db_sql/
+
+# Ignore any log files
+/*.log
+
+# Ignore system-specific files
+/.DS_Store
+Thumbs.db
