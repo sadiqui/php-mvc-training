@@ -1,6 +1,38 @@
 <?php
 
-class DBConnection {
+namespace Database;
+
+use App\Config\DatabaseConfig;
+
+class DBConnection
+{
+    private static $connection = null;
+
+    public static function getConnection()
+    {
+        if (self::$connection === null) {
+            $config = DatabaseConfig::getConfig();
+
+            self::$connection = new \mysqli(
+                $config['host'],
+                $config['username'],
+                $config['password'],
+                $config['database']
+            );
+
+            // Check connection
+            if (self::$connection->connect_error) {
+                die("Connection failed: " . self::$connection->connect_error);
+            }
+        }
+
+        return self::$connection;
+    }
+}
+
+?>
+
+<!-- class DBConnection {
     private static $connection;
 
     public static function getConnection() {
@@ -24,4 +56,4 @@ class DBConnection {
 //     echo 'Connected successfully';
 // }else{
 //     echo 'Failed to connect to database server';
-// }
+// } -->
